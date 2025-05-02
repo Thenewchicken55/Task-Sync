@@ -14,7 +14,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/tasksync.git
+git clone https://github.com/YOUR_USERNAME/Task-Sync.git
 cd tasksync
 
 # Install dependencies
