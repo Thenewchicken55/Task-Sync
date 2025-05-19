@@ -120,6 +120,7 @@ export function SortableTodo({
           }}
           className="bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer"
         >
+        x
         </button>
       </div>
     </div>
