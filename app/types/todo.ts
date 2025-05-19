@@ -4,6 +4,7 @@ export interface Todo {
   description: string;
   isRecurring: boolean;
   recurrenceType?: "daily";
+  recurrenceDays?: number[];
   date?: string;
   completed?: boolean;
   completedAt?: string;
