@@ -1,12 +1,27 @@
 {
-  "name": "final",
+  "name": "calendarScheduler",
   "version": "0.1.0",
   "private": true,
+  "main": "server.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export",
+    "pkg": "pkg ."
+  },
+  "pkg": {
+    "scripts": "server.js",
+    "assets": [
+      "public/**/*",
+      ".next/**/*"
+    ],
+    "targets": [
+      "node14-linux-x64",
+      "node14-macos-x64",
+      "node14-win-x64"
+    ]
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -32,7 +47,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.1.7",
     "typescript": "^5"
   }
 }
