@@ -143,15 +143,14 @@ export default function UploadTests({
                       <button 
                         onClick={downloadFile}
                         className="inline-flex items-center px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md group cursor-pointer">
-                          <Image src="/file.svg" className="w-5 h-5 mr-2" alt="Download Icon" />
+                          <Image src="/file.svg" width={10} height={10} className="w-5 h-5 mr-2" alt="Download Icon" />
                           Sample File Format
                       </button>
 
                      {/* Upload button */}
-                     
                     <div className="flex items-center justify-center">
                       <label className="inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition-all duration-200 shadow-sm hover:shadow-md group cursor-pointer">
-                        <Image src="/upload2.svg" className="w-5 h-5 mr-2" alt="Upload Icon" />
+                        <Image src="/upload2.svg" width={10} height={10} className="w-5 h-5 mr-2" alt="Upload Icon" />
                         <span>Upload File</span>
                       </label>
                       <input id="file-upload" type="file" className="hidden" onChange={handleUpload} />
