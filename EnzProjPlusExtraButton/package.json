@@ -36,9 +36,6 @@
     "electron-build": "^0.0.3",
     "electron-serve": "^2.1.1",
     "electron-store": "^10.0.1",
-    "pkg": "^5.8.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
@@ -55,6 +52,8 @@
     "next": "^15.3.2",
     "nextron": "^9.5.0",
     "postcss": "^8.5.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.7",
     "typescript": "^5"
   }
