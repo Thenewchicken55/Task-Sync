@@ -19,16 +19,9 @@ export default function HomePage() {
             height={256}
           />
         </div>
-        <span>⚡ Electron ⚡</span>
-        <span>+</span>
-        <span>Next.js</span>
-        <span>+</span>
-        <span>tailwindcss</span>
-        <span>=</span>
-        <span>💕 </span>
       </div>
       <div className="mt-1 w-full flex-wrap flex justify-center">
-        <Link href="/next">Go to next page</Link>
+        <Link href="/calendar">Go to next page</Link>
       </div>
     </React.Fragment>
   )
