@@ -59,6 +59,8 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
   };
 
   const handleAddTodo = (todo: Todo) => {
+    console.log(todo);
+
     if (selectedTodo) {
       const updatedTodos = todos.map((t) => (t.id === todo.id ? todo : t));
       setTodos(updatedTodos);
@@ -238,7 +240,8 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
         initialTodo={selectedTodo}
       />
       <div className="justify-center items-center p-10">
-        <ExportDates />
+        <ExportDates
+        allTasks={todos} />
       </div>
 
     </div>

@@ -24,14 +24,14 @@ export default function AddTodoModal({
     if (initialTodo) {
       setTitle(initialTodo.title);
       setDescription(initialTodo.description);
-      setIsRecurring(initialTodo.isRecurring);
+      // setIsRecurring(initialTodo.isRecurring);
       setRecurrenceType(initialTodo.recurrenceType || "daily");
       setPriority(initialTodo.priority);
       setDate(initialTodo.date || "");
     } else {
       setTitle("");
       setDescription("");
-      setIsRecurring(false);
+      // setIsRecurring(false);
       setRecurrenceType("daily");
       setPriority(undefined);
       setDate("");
@@ -57,7 +57,7 @@ export default function AddTodoModal({
     onAdd(todo);
     setTitle("");
     setDescription("");
-    setIsRecurring(false);
+    // setIsRecurring(false);
     setRecurrenceType("daily");
     setPriority(undefined);
     setDate("");
