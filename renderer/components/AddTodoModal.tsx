@@ -3,15 +3,8 @@
 import { Fragment, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Todo } from "../types/todo";
+import { AddTodoModalProps } from "../types/AddTodoModalProps";
 import { v4 as uuidv4 } from "uuid";
-
-interface AddTodoModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onAdd: (todo: Todo) => void;
-  onComplete?: (id: string) => void;
-  initialTodo?: Todo | null;
-}
 
 export default function AddTodoModal({
   isOpen,
