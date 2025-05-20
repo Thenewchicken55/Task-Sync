@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import Image from "next/image";
-import { AddTodoModalProps } from "../types/AddTodoModalProps";
+import { Todo } from "../types/todo";
+import { v4 as uuidv4 } from "uuid";
 
+interface FileUploadProps {
+  addTodoHandler: (todo: Todo) => void;
+}
 
-const FileUpload: React.FC = () => {
+const FileUpload: React.FC<FileUploadProps> = ({ addTodoHandler }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileData, setFileData] = useState<String []>(null);
 
@@ -35,6 +39,24 @@ const FileUpload: React.FC = () => {
     formData.append("file", selectedFile);
 
     console.log(fileData);
+
+    fileData.forEach((title) => {
+      console.log(title);
+      // Only add if the title isn’t just empty spaces
+      if (title.trim()) {
+        const todo: Todo = {
+          id: uuidv4(),
+          title: title.trim(),
+          description: "",      // set default or additional properties as needed
+          date: "",             // could be a default date or left empty
+          completed: false,
+          isRecurring: false,
+          recurrenceType: undefined,
+          priority: undefined,
+        };
+        addTodoHandler(todo);
+      }
+  });
 
   };
 

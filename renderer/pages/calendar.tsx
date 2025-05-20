@@ -24,7 +24,10 @@ export default function Home() {
     setIsModalOpen(false);
   };
 
-  const handleUpload = () => {
+  const handleUpload = (todos: Todo[]) => {
+    todos.forEach((todo) => {
+      setTodos((prevTodos) => [...prevTodos, todo]);
+    });
     setUploadWindowOpen(true);
   };
 
@@ -107,7 +110,7 @@ export default function Home() {
       <UploadTests
         isOpen={isUploadWindowOpen}
         onClose={() => setUploadWindowOpen(false)}
-        onAdd={handleUpload}
+        onAdd={handleAddTodo}
       />
     </div>
   );

@@ -4,16 +4,9 @@ import { Fragment, useState, useEffect } from "react";
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import { Todo } from "../types/todo";
+import { AddTodoModalProps } from "../types/AddTodoModalProps";
 import { v4 as uuidv4 } from "uuid";
 import FileUpload from "../hooks/FileUpload";
-
-interface AddTodoModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onAdd: (todo: Todo) => void;
-  onComplete?: (id: string) => void;
-  initialTodo?: Todo | null;
-}
 
 export default function UploadTests({
   isOpen,
@@ -47,14 +40,14 @@ export default function UploadTests({
     }
   }, [initialTodo]);
 
-  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      // Handle the uploaded file here
-      console.log(file); // You can do something with the file, like save it to a server or perform other actions.
-      // You can also update the state or perform other actions based on the file.
-    }
-  };
+  // const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) {
+  //     // Handle the uploaded file here
+  //     console.log(file); // You can do something with the file, like save it to a server or perform other actions.
+  //     // You can also update the state or perform other actions based on the file.
+  //   }
+  // };
 
   
     const downloadFile = () => {
@@ -143,7 +136,9 @@ export default function UploadTests({
                   Upload your &quot;.csv&quot; file here containing your tests. To see a sample format, click the &quot;Sample File Format&quot; button below.
                   </p>
       
-                  <FileUpload />
+                  <FileUpload
+                  addTodoHandler={onAdd} />
+
                   <div className="pt-5 flex justify-center items-center">
                     <button 
                       onClick={downloadFile}
