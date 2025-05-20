@@ -115,7 +115,7 @@ export default function TodoList({ todos, setTodos }: TodoListProps) {
   return (
     <div className="h-full">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-gray-400">Tasks</h2>
+        <h2 className="text-lg font-semibold text-gray-400">Tests</h2>
         <button
           onClick={() => setIsSortable(!isSortable)}
           className={`group relative inline-flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 cursor-pointer ${

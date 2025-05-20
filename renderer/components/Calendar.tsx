@@ -7,6 +7,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { DateSelectArg, EventDropArg, EventClickArg } from "@fullcalendar/core";
 import { Todo } from "../types/todo";
 import AddTodoModal from "./AddTodoModal";
+import ExportDates from "../components/ExportDates";
 
 interface CalendarProps {
   todos: Todo[];
@@ -236,6 +237,10 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
         onComplete={handleComplete}
         initialTodo={selectedTodo}
       />
+      <div className="justify-center items-center p-10">
+        <ExportDates />
+      </div>
+
     </div>
   );
 }
