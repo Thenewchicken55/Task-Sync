@@ -44,8 +44,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex gap-8">
           <div className="w-1/3 bg-white rounded-lg shadow-lg p-6 transform -rotate-0.5 hover:rotate-0 transition-transform duration-300 border border-gray-200">
             <div className="flex flex-col items-center mb-6 mt-2">
-              <h2 className="text-2xl font-semibold mb-4 text-black">
-                Task List
+              <h2 className="text-2xl font-semibold mb-4 text-red">
+                Task List2
               </h2>
 
               {/* button container */}
