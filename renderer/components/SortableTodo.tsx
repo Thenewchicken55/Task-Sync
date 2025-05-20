@@ -116,18 +116,11 @@ export function SortableTodo({
             e.stopPropagation();
             console.log("Delete button clicked");
             onDelete(todo.id);
-          }}
-          className="bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer"
-        >
-        </button>
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
             onComplete(todo.id);
           }}
-          className="bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors cursor-pointer"
-        ></button>
+          className="bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer"
+        >X
+        </button>
       </div>
     </div>
   );
