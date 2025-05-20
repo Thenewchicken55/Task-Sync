@@ -123,7 +123,7 @@ export default function UploadTests({
                 </Dialog.Title>
                 <form onSubmit={handleSubmit} className="mt-4">
                   <p className='pb-5'>
-                  Upload your &quot;.csv&quot; file here containing your tests. To see a sample format, click the &quot;Sample File Format&quot; button below.
+                  Upload your &quot;.csv&quot; or &quot;.txt&quot; file here containing your tests. To see a sample format, click the &quot;Sample File Format&quot; button below.
                   </p>
       
                   <FileUpload

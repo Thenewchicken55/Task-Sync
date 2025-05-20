@@ -9,7 +9,7 @@ export default function Navbar() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link
-              href="/"
+              href="/calendar"
               className="text-2xl font-bold text-white tracking-tight hover:tracking-wide transition-all duration-300"
             >
               TaskSync
