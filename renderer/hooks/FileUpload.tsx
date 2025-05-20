@@ -4,6 +4,7 @@ import Image from "next/image";
 
 const FileUpload: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileData, setFileData] = useState<String []>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = event.target.files;
@@ -12,6 +13,19 @@ const FileUpload: React.FC = () => {
     } else {
       setSelectedFile(null); // Clear the state if no file selected
     }
+
+    const file = event.target.files[0]; // Get the file
+    const reader = new FileReader(); // Create a FileReader instance
+
+    reader.onload = (e) => {
+        const text = e.target.result; // The file content will be here
+        const lines = (text as string).split('\n');
+        // console.log(text);
+        setFileData(lines);
+    };
+
+    reader.readAsText(file); // Read the file as text
+
   };
 
   const handleUpload = () => {
@@ -19,14 +33,8 @@ const FileUpload: React.FC = () => {
     const formData = new FormData();
     formData.append("file", selectedFile);
 
-    // Replace 'your-api-url' with your actual API endpoint for file upload
-    fetch('your-api-url', {
-      method: 'POST',
-      body: formData,
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error uploading file:', error));
+    console.log(fileData);
+
   };
 
 
