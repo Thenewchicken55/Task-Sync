@@ -183,7 +183,11 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
   };
 
   return (
-    <div className="h-full [&_.fc-button]:!bg-gray-800 [&_.fc-button]:!text-white [&_.fc-button]:!border-gray-800 [&_.fc-button:hover]:!bg-gray-700 [&_.fc-button-active]:!bg-gray-900 [&_.fc-button-active]:!text-white [&_.fc-event]:!bg-gray-700 [&_.fc-event]:!border-transparent [&_.fc-event]:!text-white [&_.fc-toolbar-title]:!font-semibold [&_.fc-event-dragging]:!opacity-50 [&_.fc-event-dragging]:!cursor-grabbing [&_.fc-button]:!cursor-pointer">
+    <div className="h-full [&_.fc-button]:!bg-gray-800 [&_.fc-button]:!text-white 
+    [&_.fc-button]:!border-gray-800 [&_.fc-button:hover]:!bg-gray-700 
+    [&_.fc-button-active]:!bg-gray-900 [&_.fc-button-active]:!text-white [&_.fc-event]:!bg-gray-700 
+    [&_.fc-event]:!border-transparent [&_.fc-event]:!text-white [&_.fc-toolbar-title]:!font-semibold 
+    [&_.fc-event-dragging]:!opacity-50 [&_.fc-event-dragging]:!cursor-grabbing [&_.fc-button]:!cursor-pointer">
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         headerToolbar={{
@@ -212,6 +216,15 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
           const x = rect.width;
           const y = rect.height;
           (info.jsEvent as DragEvent).dataTransfer?.setDragImage(eventEl, x, y);
+          // Calculate the new date (same day next week)
+          const event = info.event;
+          const newStartDate = new Date(event.start);
+          newStartDate.setDate(newStartDate.getDate() + 7);
+          const newEndDate = new Date(event.end);
+          newEndDate.setDate(newEndDate.getDate() + 7);
+          // Update the event's start and end dates
+          event.setStart(newStartDate);
+          event.setEnd(newEndDate);
         }}
         dayCellDidMount={(info) => {
           const cell = info.el;
