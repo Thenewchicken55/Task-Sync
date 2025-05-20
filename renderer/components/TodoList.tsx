@@ -60,7 +60,6 @@ export default function TodoList({ todos, setTodos }: TodoListProps) {
   const handleDelete = (id: string) => {
     console.log("Deleting todo with id:", id);
     const updatedTodos = todos.filter((todo) => todo.id !== id);
-    console.log("Updated todos:", updatedTodos);
     setTodos(updatedTodos);
   };
 

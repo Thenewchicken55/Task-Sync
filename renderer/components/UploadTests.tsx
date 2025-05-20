@@ -4,7 +4,7 @@ import { Fragment, useState, useEffect } from "react";
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import { Todo } from "../types/todo";
-import { AddTodoModalProps } from "../types/AddTodoModalProps";
+import { AddTodoModalProps2 } from "../types/AddTodoModalProps";
 import { v4 as uuidv4 } from "uuid";
 import FileUpload from "../hooks/FileUpload";
 
@@ -14,7 +14,7 @@ export default function UploadTests({
   onAdd,
   onComplete,
   initialTodo,
-}: AddTodoModalProps) {
+}: AddTodoModalProps2) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isRecurring, setIsRecurring] = useState(false);
@@ -40,16 +40,6 @@ export default function UploadTests({
     }
   }, [initialTodo]);
 
-  // const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (file) {
-  //     // Handle the uploaded file here
-  //     console.log(file); // You can do something with the file, like save it to a server or perform other actions.
-  //     // You can also update the state or perform other actions based on the file.
-  //   }
-  // };
-
-  
     const downloadFile = () => {
       
       // Define the CSV content
@@ -77,19 +67,19 @@ export default function UploadTests({
     e.preventDefault();
     if (!title.trim()) return;
 
-    const todo: Todo = {
-      id: initialTodo?.id || uuidv4(),
-      title: title.trim(),
-      description: description.trim(),
-      date: initialTodo?.date,
-      completed: initialTodo?.completed || false,
-      completedAt: initialTodo?.completedAt,
-      isRecurring,
-      recurrenceType: isRecurring ? recurrenceType : undefined,
-      priority,
-    };
-
-    onAdd(todo);
+    // const todo: Todo = {
+    //   id: initialTodo?.id || uuidv4(),
+    //   title: title.trim(),
+    //   description: description.trim(),
+    //   date: initialTodo?.date,
+    //   completed: initialTodo?.completed || false,
+    //   completedAt: initialTodo?.completedAt,
+    //   isRecurring,
+    //   recurrenceType: isRecurring ? recurrenceType : undefined,
+    //   priority,
+    // };
+    // const list : Todo[] = [todo]
+    // onAdd(list);
     setTitle("");
     setDescription("");
     setIsRecurring(false);
@@ -178,26 +168,6 @@ export default function UploadTests({
                     <button
                       type="button"
                       onClick={onClose}
-                      className="inline-flex items-center px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md group cursor-pointer"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-200"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
                       className="inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition-all duration-200 shadow-sm hover:shadow-md group cursor-pointer"
                     >
                       <svg
@@ -214,7 +184,7 @@ export default function UploadTests({
                           d="M5 13l4 4L19 7"
                         />
                       </svg>
-                      {initialTodo ? "Save Changes" : "Done"}
+                      Close
                     </button>
                   </div>
                 </form>

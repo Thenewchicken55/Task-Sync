@@ -23,17 +23,15 @@ export default function Home() {
     setTodos((prevTodos) => [...prevTodos, todo]);
     setIsModalOpen(false);
   };
-
+  
   const handleUpload = (todos: Todo[]) => {
-    todos.forEach((todo) => {
-      setTodos((prevTodos) => [...prevTodos, todo]);
-    });
-    setUploadWindowOpen(true);
+    setTodos((prevTodos) => [...prevTodos, ...todos]);
   };
-
+  
   const handleUpdateTodos = (newTodos: Todo[]) => {
     console.log("Updating todos:", newTodos);
     setTodos(newTodos);
+    setUploadWindowOpen(false);
   };
 
   if (!isMounted) {
@@ -110,7 +108,7 @@ export default function Home() {
       <UploadTests
         isOpen={isUploadWindowOpen}
         onClose={() => setUploadWindowOpen(false)}
-        onAdd={handleAddTodo}
+        onAdd={handleUpload}
       />
     </div>
   );

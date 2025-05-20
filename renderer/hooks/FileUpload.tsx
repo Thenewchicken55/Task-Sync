@@ -4,7 +4,7 @@ import { Todo } from "../types/todo";
 import { v4 as uuidv4 } from "uuid";
 
 interface FileUploadProps {
-  addTodoHandler: (todo: Todo) => void;
+  addTodoHandler: (todo: Todo[]) => void;
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({ addTodoHandler }) => {
@@ -25,7 +25,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ addTodoHandler }) => {
     reader.onload = (e) => {
         const text = e.target.result; // The file content will be here
         const lines = (text as string).split('\n');
-        // console.log(text);
         setFileData(lines);
     };
 
@@ -38,25 +37,24 @@ const FileUpload: React.FC<FileUploadProps> = ({ addTodoHandler }) => {
     const formData = new FormData();
     formData.append("file", selectedFile);
 
-    console.log(fileData);
+    const newTodos: Todo[] = [];
 
     fileData.forEach((title) => {
-      console.log(title);
       // Only add if the title isn’t just empty spaces
       if (title.trim()) {
-        const todo: Todo = {
-          id: uuidv4(),
-          title: title.trim(),
-          description: "",      // set default or additional properties as needed
-          date: "",             // could be a default date or left empty
-          completed: false,
-          isRecurring: false,
-          recurrenceType: undefined,
-          priority: undefined,
-        };
-        addTodoHandler(todo);
-      }
+        newTodos.push({
+        id: uuidv4(),
+        title: title.trim(),
+        description: "",
+        date: "",
+        completed: false,
+        isRecurring: false,
+        recurrenceType: undefined,
+        priority: undefined,
+      });
+    }
   });
+  addTodoHandler(newTodos);
 
   };
 
