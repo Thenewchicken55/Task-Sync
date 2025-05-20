@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import { Todo } from "../types/todo";
 import { v4 as uuidv4 } from "uuid";
+import FileUpload from "../hooks/FileUpload";
 
 interface AddTodoModalProps {
   isOpen: boolean;
@@ -54,24 +55,27 @@ export default function UploadTests({
       // You can also update the state or perform other actions based on the file.
     }
   };
+
+
+
   const downloadFile = () => {
     
     // Define the CSV content
-     const csvContent = 'data:text/csv;charset=utf-8,Test 0\nTest 1\nTest 2\nTest 3';
+    const csvContent = 'data:text/csv;charset=utf-8,Test 0\nTest 1\nTest 2\nTest 3';
 
      // Create a link element
-     const link = document.createElement('a');
-     link.href = encodeURI(csvContent);
-     link.download = 'format.csv';
+    const link = document.createElement('a');
+    link.href = encodeURI(csvContent);
+    link.download = 'format.csv';
 
      // Append the link to the body
-     document.body.appendChild(link);
+    document.body.appendChild(link);
 
      // Programmatically click the link to trigger the download
-     link.click();
+    link.click();
 
      // Remove the link from the document
-     document.body.removeChild(link);
+    document.body.removeChild(link);
 
   };
 
@@ -139,12 +143,22 @@ export default function UploadTests({
                   <p className='pb-5'>
                   Upload your &quot;.csv&quot; file here containing your tests. To see a sample format, click the &quot;Sample File Format&quot; button below.
                   </p>
+      
+                  <FileUpload />
+
                   <div className="flex space-x-4 justify-center">
                       <button 
                         onClick={downloadFile}
                         className="inline-flex items-center px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md group cursor-pointer">
                           <Image src="/file.svg" width={10} height={10} className="w-5 h-5 mr-2" alt="Download Icon" />
                           Sample File Format
+                      </button>
+                      
+                      <button 
+                        onClick={handleUpload}
+                        className="inline-flex items-center px-4 py-2 bg-gray text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md group cursor-pointer">
+                          <Image src="/file.svg" width={10} height={10} className="w-5 h-5 mr-2" alt="Download Icon" />
+                          u
                       </button>
 
                      {/* Upload button */}
