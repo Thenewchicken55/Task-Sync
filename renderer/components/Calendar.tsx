@@ -38,9 +38,9 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
 
   const handleEventDrop = (info: EventDropArg) => {
     const { event } = info;
-    const originalId = event.extendedProps.originalId;
+    const originalId = event.extendedProps.originalId || event.id;
     const todo = todos.find((t) => t.id === originalId);
-
+    
     if (todo && event.start) {
       const newDate = new Date(event.start);
       const formattedDate = newDate.toISOString().split("T")[0];
@@ -201,16 +201,14 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
     event.setStart(newStartDate);
     event.setEnd(newEndDate);
 
-    const eventID = event.extendedProps.originalId;
+    const eventID = event.extendedProps.originalId  || event.id;
     const todo = todos.find((t) => t.id === eventID);
-    console.log("WE have a dragged event " + todo + " " + eventID);
     if (todo && event.start) {
-      
       const updatedTodos = todos.map((t) => {
         if (t.id === eventID) {
           return {
             ...t,
-            isRecurring: true,
+            isRecurring: false,
           };
         }
         return t;
@@ -218,6 +216,21 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
       setTodos(updatedTodos);
     }
         
+  };
+
+  const handleCellHover = (info) => {
+    const cell = info.el;
+    cell.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      cell.classList.add("bg-blue-50");
+    });
+    cell.addEventListener("dragleave", () => {
+      cell.classList.remove("bg-blue-50");
+    });
+    cell.addEventListener("drop", (e) => {
+      e.preventDefault();
+      cell.classList.remove("bg-blue-50");
+    });
   };
 
   return (
@@ -249,20 +262,7 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
         eventDrop={handleEventDrop}
         drop={handleDrop}
         eventDragStart={handleDragevent}
-        dayCellDidMount={(info) => {
-          const cell = info.el;
-          cell.addEventListener("dragover", (e) => {
-            e.preventDefault();
-            cell.classList.add("bg-blue-50");
-          });
-          cell.addEventListener("dragleave", () => {
-            cell.classList.remove("bg-blue-50");
-          });
-          cell.addEventListener("drop", (e) => {
-            e.preventDefault();
-            cell.classList.remove("bg-blue-50");
-          });
-        }}
+        dayCellDidMount={handleCellHover}
       />
       <AddTodoModal
         isOpen={isModalOpen}
