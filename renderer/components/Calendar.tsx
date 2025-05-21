@@ -58,6 +58,7 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
     }
   };
 
+  // add new task through calendar
   const handleAddTodo = (todo: Todo) => {
     console.log(todo);
 
@@ -137,12 +138,14 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
     return events;
   };
 
+  // all events on the calendar
   const allEvents = todos
     .filter((todo) => !todo.completed)
     .flatMap((todo) => {
       if (todo.isRecurring) {
         return generateRecurringEvents(todo);
       } else if (todo.date) {
+        console.log("WE IN HERE BUDDY");
         return [
           {
             id: todo.id,
@@ -182,6 +185,41 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
     }
   };
 
+  const handleDragevent = (info) => {
+    const eventEl = info.el;
+    const rect = eventEl.getBoundingClientRect();
+    const x = rect.width;
+    const y = rect.height;
+    (info.jsEvent as DragEvent).dataTransfer?.setDragImage(eventEl, x, y);
+    // Calculate the new date (same day next week)
+    const event = info.event;
+    const newStartDate = new Date(event.start);
+    newStartDate.setDate(newStartDate.getDate() + 7);
+    const newEndDate = new Date(event.end);
+    newEndDate.setDate(newEndDate.getDate() + 7);
+    // Update the event's start and end dates
+    event.setStart(newStartDate);
+    event.setEnd(newEndDate);
+
+    const eventID = event.extendedProps.originalId;
+    const todo = todos.find((t) => t.id === eventID);
+    console.log("WE have a dragged event " + todo + " " + eventID);
+    if (todo && event.start) {
+      
+      const updatedTodos = todos.map((t) => {
+        if (t.id === eventID) {
+          return {
+            ...t,
+            isRecurring: true,
+          };
+        }
+        return t;
+      });
+      setTodos(updatedTodos);
+    }
+        
+  };
+
   return (
     <div className="h-full [&_.fc-button]:!bg-gray-800 [&_.fc-button]:!text-white 
     [&_.fc-button]:!border-gray-800 [&_.fc-button:hover]:!bg-gray-700 
@@ -210,22 +248,7 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
         eventClick={handleEventClick}
         eventDrop={handleEventDrop}
         drop={handleDrop}
-        eventDragStart={(info) => {
-          const eventEl = info.el;
-          const rect = eventEl.getBoundingClientRect();
-          const x = rect.width;
-          const y = rect.height;
-          (info.jsEvent as DragEvent).dataTransfer?.setDragImage(eventEl, x, y);
-          // Calculate the new date (same day next week)
-          const event = info.event;
-          const newStartDate = new Date(event.start);
-          newStartDate.setDate(newStartDate.getDate() + 7);
-          const newEndDate = new Date(event.end);
-          newEndDate.setDate(newEndDate.getDate() + 7);
-          // Update the event's start and end dates
-          event.setStart(newStartDate);
-          event.setEnd(newEndDate);
-        }}
+        eventDragStart={handleDragevent}
         dayCellDidMount={(info) => {
           const cell = info.el;
           cell.addEventListener("dragover", (e) => {
