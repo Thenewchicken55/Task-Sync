@@ -7,7 +7,7 @@ import { Todo } from "../types/todo";
 
 export default function ExportDates({allTasks}: {allTasks: Todo[]}) {
 
-    const filteredData = allTasks.map(({ title, date }) => ({ title, date }));
+    const filteredData = allTasks.map(({ title, date, endDate, duration }) => ({ title, date, endDate, duration }));
 
 
 

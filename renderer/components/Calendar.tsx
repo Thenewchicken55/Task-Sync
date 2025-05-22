@@ -196,31 +196,47 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
   //     }
   //     return [];
   //   });
-  const allEvents = todos
-    .filter((todo) => !todo.completed)
-    .flatMap((todo) => {
-      console.log("todos!");
-      console.log(todos);
-        const events = [
-          {
-            // id: todo.id,
-            title: todo.title,
-            start: todo.date,
-            // end: todo.endDate || todo.date,
-            allDay: true,
-            backgroundColor: "#374151",
-            borderColor: "transparent",
-            textColor: "#FFFFFF",
-            width: todo.width,
-            height: todo.height,
-            x: todo.x,
-            y: todo.y,
-            shape: todo.shape,
-            // Object: todo.Object,
-          },
-        ];
-        return events;
-    });
+
+
+  // const allEvents = todos
+  //   .filter((todo) => !todo.completed)
+  //   .map((todo) => ({
+  //     title: todo.title,
+  //     start: todo.date,
+  //   }));
+
+const allEvents = [];
+todos.forEach((todo) => {
+  if (!todo.completed) {
+    allEvents.push({ title: todo.title, start: todo.date });
+  }
+});
+
+  // const allEvents = todos
+  //   .filter((todo) => !todo.completed)
+  //   .flatMap((todo) => {
+  //     console.log("todos!");
+  //     console.log(todos);
+  //       const events = [
+  //         {
+  //           // id: todo.id,
+  //           title: todo.title,
+  //           start: todo.date,
+  //           // end: todo.endDate || todo.date,
+  //           allDay: true,
+  //           backgroundColor: "#374151",
+  //           borderColor: "transparent",
+  //           textColor: "#FFFFFF",
+  //           width: todo.width,
+  //           height: todo.height,
+  //           x: todo.x,
+  //           y: todo.y,
+  //           shape: todo.shape,
+  //           // Object: todo.Object,
+  //         },
+  //       ];
+  //       return events;
+  //   });
   // const allEvents = todos
   //   .filter((todo) => !todo.completed)
   //   .map((todo) => {
@@ -367,27 +383,32 @@ function renderEventContent(eventInfo) {
     });
   };
 
-  const handleEventResize = (info) => {
+  const handleEventResize = (info ) => {
+    // console.log("WRE RESIZING");
     // e.preventDefault();
     const rect = info.el.getBoundingClientRect();
 
     const event = info.event;
     const eventID = event.extendedProps.originalId  || event.id;
     const todo = todos.find((t) => t.id === eventID);
-
+    // console.log(eventID);
     if (todo && event.start) {
+      // console.log("ENDING");
+      // console.log(event.end);
       const updatedTodos = todos.map((t) => {
         if (t.id === eventID) {
           return {
             ...t,
+            title: todo.title,
             isRecurring: false,
             x: rect.left,
             y: rect.top,
             width: rect.width,
             height: rect.height,
             end: event.end,
-            shape: rect,
-            // duration: ?
+            endDate: "" + (event.end.getMonth() + 1) + "/" + (event.end.getDate() - 1) + "/" + event.end.getFullYear(),
+            duration: event.end.getDate() - event.start.getDate(),
+            // shape: rect,
           };
         }
         return t;
@@ -422,6 +443,8 @@ function renderEventContent(eventInfo) {
         weekends={true}
         droppable={true}
         // draggable={true}
+        eventResizableFromStart={true}
+        eventDurationEditable={true}
         // events={allEvents}
         select={handleDateSelect}
         eventClick={handleEventClick}
@@ -430,7 +453,7 @@ function renderEventContent(eventInfo) {
         // eventDragStart={handleDragevent}
         dayCellDidMount={handleCellHover}
         eventResize={handleEventResize}
-        eventContent={renderEventContent}
+        // eventContent={renderEventContent}
         weekNumberFormat={{week: "numeric"}}
         // weekText={"CW"}
       />
