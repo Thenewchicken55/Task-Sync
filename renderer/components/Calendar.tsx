@@ -417,11 +417,12 @@ function renderEventContent(eventInfo) {
         selectable={true}
         selectMirror={true}
         dayMaxEvents={true}
+        weekNumbers={true}
         // maxEventsPerDay={true}
         weekends={true}
         droppable={true}
         // draggable={true}
-        events={allEvents}
+        // events={allEvents}
         select={handleDateSelect}
         eventClick={handleEventClick}
         eventDrop={handleEventDrop}
@@ -430,6 +431,8 @@ function renderEventContent(eventInfo) {
         dayCellDidMount={handleCellHover}
         eventResize={handleEventResize}
         eventContent={renderEventContent}
+        weekNumberFormat={{week: "numeric"}}
+        // weekText={"CW"}
       />
       <AddTodoModal
         isOpen={isModalOpen}
