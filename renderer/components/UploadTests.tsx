@@ -18,7 +18,7 @@ export default function UploadTests({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isRecurring, setIsRecurring] = useState(false);
-  const [recurrenceType, setRecurrenceType] = useState<"daily">("daily");
+  const [recurrenceType, setRecurrenceType] = useState<string>("daily");
   const [priority, setPriority] = useState<1 | 2 | 3 | undefined>(undefined);
   const [date, setDate] = useState("");
 
