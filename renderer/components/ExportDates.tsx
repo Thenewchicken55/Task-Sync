@@ -7,9 +7,9 @@ import { Todo } from "../types/todo";
 
 export default function ExportDates({allTasks}: {allTasks: Todo[]}) {
 
-    const filteredData = allTasks.map(({ title, date, endDate, duration }) => ({ title, date, endDate, duration }));
-
-
+    const filteredData = allTasks
+    .filter((todo) => !todo.completed)
+    .map(({ title, date, endDate, duration }) => ({ title, date, endDate, duration }));
 
     return (
         <CSVLink 
