@@ -94,7 +94,7 @@ export default function AddTodoModal({
                   as="h3"
                   className="text-2xl font-semibold text-gray-900 mb-6"
                 >
-                  {initialTodo ? "Edit Task" : "Add New Task"}
+                  {initialTodo ? "Edit Test" : "Add New Test"}
                 </Dialog.Title>
                 <form onSubmit={handleSubmit} className="mt-4">
                   <div className="space-y-6">
@@ -171,7 +171,7 @@ export default function AddTodoModal({
                         htmlFor="recurring"
                         className="ml-2 block text-sm text-gray-700"
                       >
-                        Daily Recurring Task
+                        Daily Recurring Test
                       </label>
                     </div>
 
@@ -215,7 +215,7 @@ export default function AddTodoModal({
                             d="M5 13l4 4L19 7"
                           />
                         </svg>
-                        Complete Task
+                        Complete Test
                       </button>
                     )}
                     <button
@@ -257,7 +257,7 @@ export default function AddTodoModal({
                           d="M5 13l4 4L19 7"
                         />
                       </svg>
-                      {initialTodo ? "Save Changes" : "Add Task"}
+                      {initialTodo ? "Save Changes" : "Add Test"}
                     </button>
                   </div>
                 </form>

@@ -46,7 +46,7 @@ export default function Home() {
           <div className="w-1/3 bg-white rounded-lg shadow-lg p-6 transform -rotate-0.5 hover:rotate-0 transition-transform duration-300 border border-gray-200">
             <div className="flex flex-col items-center mb-6 mt-2">
               <h2 className="text-2xl font-semibold mb-4 text-red">
-                Task List
+                Test List
               </h2>
 
               {/* button container */}

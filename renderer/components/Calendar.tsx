@@ -36,6 +36,7 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
     }
   };
 
+  // used when you move an event
   const handleEventDrop = (info: EventDropArg) => {
     const { event } = info;
     const originalId = event.extendedProps.originalId || event.id;
@@ -50,6 +51,8 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
           return {
             ...t,
             date: formattedDate,
+            endDate: formattedDate,
+            duration: 1,
           };
         }
         return t;
@@ -145,9 +148,11 @@ todos.forEach((todo) => {
   }
 });
 
-  const handleDrop = (info: { date: Date; draggedEl: HTMLElement }) => {
+  // used when you drop an event from the test list
+  const handleDrop = (info) => {
     const { date, draggedEl } = info;
     const todoId = draggedEl.getAttribute("data-todo-id");
+    console.log(info);
 
     if (todoId) {
       const todo = todos.find((t) => t.id === todoId);
@@ -160,6 +165,8 @@ todos.forEach((todo) => {
             return {
               ...t,
               date: formattedDate,
+              endDate: formattedDate,
+              duration: 1,
             };
           }
           return t;
