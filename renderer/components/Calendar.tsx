@@ -50,10 +50,6 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
           return {
             ...t,
             date: formattedDate,
-            width: todo.width,
-            height: todo.height,
-            x: todo.x,
-            y: todo.y,
           };
         }
         return t;
@@ -142,160 +138,12 @@ export default function Calendar({ todos, setTodos }: CalendarProps) {
     return events;
   };
 
-// const allEvents = todos.filter(
-//   (todo, index, self) =>
-//     index === self.findIndex((t) => t.title === todo.title && t.date === todo.date)
-// ).filter((todo) => !todo.completed);
-
-  // all events on the calendar
-  // const allEvents = todos
-  //   .filter((todo) => !todo.completed)
-  //   .flatMap((todo) => {
-  //     console.log("todos!");
-  //     console.log(todos);
-  //     if (todo.isRecurring) {
-  //       return generateRecurringEvents(todo);
-  //     } else {
-  //       // const events = [
-  //       //   {
-  //       //     id: todo.id,
-  //       //     title: todo.title,
-  //       //     start: todo.date,
-  //       //     end: todo.endDate || todo.date,
-  //       //     allDay: true,
-  //       //     backgroundColor: "#374151",
-  //       //     borderColor: "transparent",
-  //       //     textColor: "#FFFFFF",
-  //       //     width: todo.width,
-  //       //     height: todo.height,
-  //       //     x: todo.x,
-  //       //     y: todo.y,
-  //       //     Object: todo.Object,
-  //       //   },
-  //       // ];
-  //       const events = [
-  //         {
-  //           // id: todo.id,
-  //           title: todo.title,
-  //           start: todo.date,
-  //           // end: todo.endDate || todo.date,
-  //           allDay: true,
-  //           backgroundColor: "#374151",
-  //           borderColor: "transparent",
-  //           textColor: "#FFFFFF",
-  //           width: todo.width,
-  //           height: todo.height,
-  //           x: todo.x,
-  //           y: todo.y,
-  //           shape: todo.shape,
-  //           // Object: todo.Object,
-  //         },
-  //       ];
-
-  //       return events;
-  //     }
-  //     return [];
-  //   });
-
-
-  // const allEvents = todos
-  //   .filter((todo) => !todo.completed)
-  //   .map((todo) => ({
-  //     title: todo.title,
-  //     start: todo.date,
-  //   }));
-
 const allEvents = [];
 todos.forEach((todo) => {
   if (!todo.completed) {
     allEvents.push({ title: todo.title, start: todo.date });
   }
 });
-
-  // const allEvents = todos
-  //   .filter((todo) => !todo.completed)
-  //   .flatMap((todo) => {
-  //     console.log("todos!");
-  //     console.log(todos);
-  //       const events = [
-  //         {
-  //           // id: todo.id,
-  //           title: todo.title,
-  //           start: todo.date,
-  //           // end: todo.endDate || todo.date,
-  //           allDay: true,
-  //           backgroundColor: "#374151",
-  //           borderColor: "transparent",
-  //           textColor: "#FFFFFF",
-  //           width: todo.width,
-  //           height: todo.height,
-  //           x: todo.x,
-  //           y: todo.y,
-  //           shape: todo.shape,
-  //           // Object: todo.Object,
-  //         },
-  //       ];
-  //       return events;
-  //   });
-  // const allEvents = todos
-  //   .filter((todo) => !todo.completed)
-  //   .map((todo) => {
-  //     console.log("todos!");
-  //     console.log(todos);
-  //     if (todo.isRecurring) {
-  //       return generateRecurringEvents(todo);
-  //     } else {
-  //       return [
-  //         {
-  //           // id: todo.id,
-  //           title: todo.title,
-  //           start: todo.date,
-  //           // end: todo.endDate || todo.date,
-  //           allDay: true,
-  //           backgroundColor: "#374151",
-  //           borderColor: "transparent",
-  //           textColor: "#FFFFFF",
-  //           width: todo.width,
-  //           height: todo.height,
-  //           x: todo.x,
-  //           y: todo.y,
-  //           shape: todo.shape,
-  //           // Object: todo.Object,
-  //         },
-  //       ];
-
-  //       }
-  //     return [];
-  //   })
-  //   .flatMap(events => events)
-  //   ;
-  
-
-//   const allEvents = [
-//   { title: 'Meeting', start: new Date() }
-// ]
-
-// a custom render function
-function renderEventContent(eventInfo) {
-  const eventTitle = eventInfo.event.title;
-
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  )
-}
-
-// function trimAll(info) {
-//   return Object.assign({}. info)
-//   .map((value, key) => {
-//     if (key === 'event' && value?.title) {
-//       const title = value.title;
-//       // const newTitle = title 
-//     }
-//   })
-// };
 
   const handleDrop = (info: { date: Date; draggedEl: HTMLElement }) => {
     const { date, draggedEl } = info;
@@ -384,31 +232,20 @@ function renderEventContent(eventInfo) {
   };
 
   const handleEventResize = (info ) => {
-    // console.log("WRE RESIZING");
-    // e.preventDefault();
-    const rect = info.el.getBoundingClientRect();
 
     const event = info.event;
     const eventID = event.extendedProps.originalId  || event.id;
     const todo = todos.find((t) => t.id === eventID);
-    // console.log(eventID);
     if (todo && event.start) {
-      // console.log("ENDING");
-      // console.log(event.end);
       const updatedTodos = todos.map((t) => {
         if (t.id === eventID) {
           return {
             ...t,
             title: todo.title,
             isRecurring: false,
-            x: rect.left,
-            y: rect.top,
-            width: rect.width,
-            height: rect.height,
             end: event.end,
             endDate: "" + (event.end.getMonth() + 1) + "/" + (event.end.getDate() - 1) + "/" + event.end.getFullYear(),
             duration: event.end.getDate() - event.start.getDate(),
-            // shape: rect,
           };
         }
         return t;
@@ -439,10 +276,8 @@ function renderEventContent(eventInfo) {
         selectMirror={true}
         dayMaxEvents={true}
         weekNumbers={true}
-        // maxEventsPerDay={true}
         weekends={true}
         droppable={true}
-        // draggable={true}
         eventResizableFromStart={true}
         eventDurationEditable={true}
         // events={allEvents}
@@ -453,9 +288,7 @@ function renderEventContent(eventInfo) {
         // eventDragStart={handleDragevent}
         dayCellDidMount={handleCellHover}
         eventResize={handleEventResize}
-        // eventContent={renderEventContent}
         weekNumberFormat={{week: "numeric"}}
-        // weekText={"CW"}
       />
       <AddTodoModal
         isOpen={isModalOpen}

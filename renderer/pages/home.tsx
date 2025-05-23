@@ -10,6 +10,6 @@ export default function HomePage() {
   }, []);
   
   return (
-    <p>Redirecting ...</p>
+    <p>Loading ...</p>
   )
 }
